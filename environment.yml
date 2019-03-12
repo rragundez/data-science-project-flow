@@ -9,3 +9,4 @@ dependencies:
   - requests=2.21
   - pip:
     - scikit-learn==0.20
+    - python-dotenv==0.10
