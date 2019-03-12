@@ -1,0 +1,11 @@
+name: ds-flow
+channels:
+  - defaults
+dependencies:
+  - python=3.7.1
+  - pandas=0.24
+  - numpy=1.15
+  - jupyter=1.0
+  - requests=2.21
+  - pip:
+    - scikit-learn==0.20
