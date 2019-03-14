@@ -3,6 +3,7 @@ import requests
 import numpy as np
 import pandas as pd
 
+
 def get_comments(comments_url, username, password, token):
     comments = requests.get(comments_url).json()
     return pd.DataFrame(comments).drop(columns=['id'])
