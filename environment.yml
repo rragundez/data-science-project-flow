@@ -2,7 +2,7 @@ name: ds-flow
 channels:
   - defaults
 dependencies:
-  - python=3.7.1
+  - python=3.6
   - pandas=0.24
   - numpy=1.15
   - jupyter=1.0
