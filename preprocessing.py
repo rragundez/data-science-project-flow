@@ -29,5 +29,7 @@ def _add_weight(x, tokens, weights):
 
 
 def create_dataset(comments, token_weights):
-    comments['weights'] = comments['name'].apply(lambda x: _add_weight(x, token_weights['token'].tolist(), token_weights['weight'].tolist()))
+    comments['weights'] = comments['name'].apply(
+        lambda x: _add_weight(x, token_weights['token'].tolist(), token_weights['weight'].tolist())
+    )
     return comments
