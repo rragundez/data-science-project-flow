@@ -1,16 +1,35 @@
-# Disable sudo to speed up the build
-sudo: false
-
-# Set the build language to Python
+sudo: required
+dist: trusty
 language: python
+matrix:
+    include:
+        # check code style and Python 2.7
+        - python: 3.6
+          env: TEST_MODE=PEP8
+        # run tests with keras from source and Python 2.7
+        - python: 3.6
+          env: TEST_MODE=TESTS
 
-# Set the python version to 2.7
-python: 3.6
+before_install:
+  - sudo apt-get update
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
 
-# Install the codecov pip dependency
 install:
-  - pip install flake8
+  - conda env create -f environment.yml -y
+  - conda activate ds-flow
 
-# Run the unit test
 script:
-  - flake8 --count
+  - if [[ "$TEST_MODE" == "PEP8" ]]; then
+      flake8 --count;
+    elif [[ "$TEST_MODE" == "TESTS" ]]; then
+      python -m pytest .;
+    fi
