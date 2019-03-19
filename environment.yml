@@ -8,6 +8,7 @@ dependencies:
   - jupyter=1.0
   - requests=2.21
   - flake8=3.7
+  - pytest=4.3
   - pip:
     - scikit-learn==0.20
     - python-dotenv==0.10
